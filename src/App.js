@@ -9,6 +9,7 @@ import SearchBox from "./components/search-box/search-box.component";
 const App = () => {
   const [searchField, setSearchField] = useState("");
   const [monsters, setMonsters] = useState([]);
+  const [filteredMonsters, setFilteredMonsters] = useState(monsters);
 
   console.log("render");
 
@@ -18,13 +19,17 @@ const App = () => {
     );
   }, []);
 
+  useEffect(() => {
+    setFilteredMonsters(
+      monsters.filter((monster) => {
+        return monster.name.toLowerCase().includes(searchField);
+      })
+    );
+  }, [monsters, searchField]);
+
   const onSearchChange = (event) => {
     setSearchField(event.target.value.toLowerCase());
   };
-
-  const filteredMonsters = monsters.filter((monster) => {
-    return monster.name.toLowerCase().includes(searchField);
-  });
 
   return (
     <div className="App">
