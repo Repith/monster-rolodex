@@ -2,9 +2,7 @@
 import "./card-list.styles.css";
 import Card from "./card.component";
 
-const CardList = (props) => {
-  const { monsters } = props;
-
+const CardList = ({ monsters }) => {
   return (
     <div className="card-list">
       {monsters.map((monster) => {
@@ -12,7 +10,7 @@ const CardList = (props) => {
         return (
           <Card
             name={name}
-            id={id}
+            key={id}
             email={email}
             alt={`monster ${name}`}
             src={`https://robohash.org/${id}?set=set2&size=180x180`}

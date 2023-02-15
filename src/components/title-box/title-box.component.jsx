@@ -1,15 +1,15 @@
 // import { Component } from "react";
-import "./search-box.styles.css";
+import "./title-box.styles.css";
 
-const SearchBox = (props) => {
-  const { onSearchChange, placeholder, className, id } = props;
+const TitleBox = (props) => {
+  const { onTitleChange, placeholder, className, id } = props;
 
   return (
     <input
-      className={`search-box ${className}`}
+      className={`title-box ${className}`}
       type="search"
       placeholder={placeholder}
-      onChange={onSearchChange}
+      onChange={onTitleChange}
       key={id}
     />
   );
@@ -30,4 +30,4 @@ const SearchBox = (props) => {
 //   }
 // }
 
-export default SearchBox;
+export default TitleBox;

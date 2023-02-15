@@ -4,14 +4,13 @@ import { useState, useEffect } from "react";
 import "./App.css";
 import CardList from "./components/card-list/card-list.component";
 import SearchBox from "./components/search-box/search-box.component";
-
+import TitleBox from "./components/title-box/title-box.component.jsx";
 //Functional Component
 const App = () => {
   const [searchField, setSearchField] = useState("");
   const [monsters, setMonsters] = useState([]);
   const [filteredMonsters, setFilteredMonsters] = useState(monsters);
-
-  console.log("render");
+  const [title, setTitle] = useState("Monster Rolodex");
 
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/users").then((response) =>
@@ -31,13 +30,23 @@ const App = () => {
     setSearchField(event.target.value.toLowerCase());
   };
 
+  const onTitleChange = (event) => {
+    setTitle(event.target.value);
+  };
+
   return (
-    <div className="App">
-      <h1 className="app-title">Monster Rolodex</h1>
+    <div className="App" key={monsters.id}>
+      <h1 className="app-title">{title}</h1>
       <SearchBox
         onSearchChange={onSearchChange}
         placeholder={"Search monsters"}
         className={"monsters-search-box"}
+      />
+      <br />
+      <TitleBox
+        onTitleChange={onTitleChange}
+        placeholder={"Change title"}
+        className={"title-changer"}
       />
       <CardList monsters={filteredMonsters} />
     </div>
