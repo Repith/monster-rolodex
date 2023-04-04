@@ -1,16 +1,20 @@
 // import { Component } from "react";
 import "./title-box.styles.css";
+import { ChangeEventHandler } from "react";
 
-const TitleBox = (props) => {
-  const { onTitleChange, placeholder, className, id } = props;
+type TitleProps = {
+  className: string;
+  placeholder?: string;
+  onTitleChange: ChangeEventHandler<HTMLInputElement>;
+};
 
+const TitleBox = ({ className, placeholder, onTitleChange }: TitleProps) => {
   return (
     <input
       className={`title-box ${className}`}
       type="search"
       placeholder={placeholder}
       onChange={onTitleChange}
-      key={id}
     />
   );
 };

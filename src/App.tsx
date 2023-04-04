@@ -1,17 +1,17 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, ChangeEvent } from "react";
 
 // import logo from "./logo.svg";
 import "./App.css";
 import CardList from "./components/card-list/card-list.component";
 import SearchBox from "./components/search-box/search-box.component";
-import TitleBox from "./components/title-box/title-box.component.jsx";
+import TitleBox from "./components/title-box/title-box.component";
 
 import { getData } from "./utils/data.utils";
 
 //Functional Component
 
-type Monster = {
-  id: string;
+export type Monster = {
+  id: number;
   name: string;
   email: string;
 };
@@ -29,6 +29,7 @@ const App = () => {
       );
       setMonsters(users);
     };
+    fetchUsers();
   }, []);
 
   useEffect(() => {
@@ -39,16 +40,28 @@ const App = () => {
     );
   }, [monsters, searchField]);
 
-  const onSearchChange = (event) => {
+  const useTitle = (
+    title: string,
+    defaultTitle: string = "Monster Rolodex"
+  ) => {
+    useEffect(() => {
+      !title ? setTitle(defaultTitle) : setTitle(title);
+      console.log(title);
+    }, [title, defaultTitle]);
+  };
+
+  useTitle(title);
+
+  const onSearchChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setSearchField(event.target.value.toLowerCase());
   };
 
-  const onTitleChange = (event) => {
+  const onTitleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setTitle(event.target.value);
   };
 
   return (
-    <div className="App" key={monsters.id}>
+    <div className="App">
       <h1 className="app-title">{title}</h1>
       <SearchBox
         onSearchChange={onSearchChange}
@@ -65,6 +78,8 @@ const App = () => {
     </div>
   );
 };
+
+export default App;
 
 //Class component
 // class App extends Component {
@@ -118,5 +133,3 @@ const App = () => {
 //     );
 //   }
 // }
-
-export default App;

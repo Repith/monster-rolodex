@@ -5,7 +5,6 @@ import { ChangeEventHandler } from "react";
 type SearchBoxProps = {
   className: string;
   placeholder?: string;
-  id: number;
   onSearchChange: ChangeEventHandler<HTMLInputElement>;
 };
 
@@ -13,16 +12,16 @@ const SearchBox = ({
   onSearchChange,
   placeholder,
   className,
-  id,
 }: SearchBoxProps) => (
   <input
     className={`search-box ${className}`}
     type="search"
     placeholder={placeholder}
     onChange={onSearchChange}
-    key={id}
   />
 );
+
+export default SearchBox;
 
 // class SearchBox extends Component {
 //   render() {
@@ -38,5 +37,3 @@ const SearchBox = ({
 //     );
 //   }
 // }
-
-export default SearchBox;
