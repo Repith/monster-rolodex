@@ -5,17 +5,30 @@ import "./App.css";
 import CardList from "./components/card-list/card-list.component";
 import SearchBox from "./components/search-box/search-box.component";
 import TitleBox from "./components/title-box/title-box.component.jsx";
+
+import { getData } from "./utils/data.utils";
+
 //Functional Component
+
+type Monster = {
+  id: string;
+  name: string;
+  email: string;
+};
+
 const App = () => {
   const [searchField, setSearchField] = useState("");
-  const [monsters, setMonsters] = useState([]);
+  const [monsters, setMonsters] = useState<Monster[]>([]);
   const [filteredMonsters, setFilteredMonsters] = useState(monsters);
   const [title, setTitle] = useState("Monster Rolodex");
 
   useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/users").then((response) =>
-      response.json().then((users) => setMonsters(users))
-    );
+    const fetchUsers = async () => {
+      const users = await getData<Monster[]>(
+        "https://jsonplaceholder.typicode.com/users"
+      );
+      setMonsters(users);
+    };
   }, []);
 
   useEffect(() => {
